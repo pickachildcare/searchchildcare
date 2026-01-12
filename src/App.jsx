@@ -500,7 +500,7 @@ export default function App() {
           <div className="max-w-4xl mx-auto relative z-10">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-10 tracking-tight leading-tight">
               <span className="bg-white text-green-900 px-4 py-1 rounded-md shadow-lg box-decoration-clone">
-                Find the perfect care for your little one
+                Find a Childcare Near You
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-green-100 mb-8 max-w-2xl mx-auto leading-relaxed">
