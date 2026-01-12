@@ -84,7 +84,7 @@
   transform: scale(1.2) translateY(-8px);
   border-color: #ffffff;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.4);
-  outline: 3px solid #2563eb;
+  outline: 3px solid #16a34a;
 }
 
 /* Hover effect on the container when the parent leaflet icon is hovered */

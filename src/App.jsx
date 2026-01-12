@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
+import leafBg from './assets/leaf.png';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { providers } from './data';
@@ -28,18 +29,18 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center space-x-2">
-            <div className="bg-blue-600 p-1.5 rounded-lg">
+            <div className="bg-green-600 p-1.5 rounded-lg">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
             </div>
-            <span className="text-xl sm:text-2xl font-bold text-blue-600 tracking-tight">Pick A Childcare</span>
+            <span className="text-xl sm:text-2xl font-bold text-green-600 tracking-tight">Pick A Childcare</span>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
             <div className="relative group">
               <button 
-                className="text-gray-600 hover:text-blue-600 font-medium transition flex items-center gap-1 py-4"
+                className="text-gray-600 hover:text-green-600 font-medium transition flex items-center gap-1 py-4"
                 onMouseEnter={() => setIsSearchByOpen(true)}
                 onMouseLeave={() => setIsSearchByOpen(false)}
               >
@@ -58,26 +59,26 @@ const Navbar = () => {
                   <a 
                     key={option}
                     href="#" 
-                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition"
+                    className="block px-4 py-2 text-sm text-gray-600 hover:bg-green-50 hover:text-green-600 transition"
                   >
                     {option}
                   </a>
                 ))}
               </div>
             </div>
-            <a href="#" className="text-gray-600 hover:text-blue-600 font-medium transition">For Providers</a>
-            <a href="#" className="text-gray-600 hover:text-blue-600 font-medium transition">Resources</a>
+            <a href="#" className="text-gray-600 hover:text-green-600 font-medium transition">For Providers</a>
+            <a href="#" className="text-gray-600 hover:text-green-600 font-medium transition">Resources</a>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <button className="text-gray-600 font-medium hover:text-blue-600">Login</button>
-            <button className="bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition shadow-md hover:shadow-lg">Sign Up</button>
+            <button className="text-gray-600 font-medium hover:text-green-600">Login</button>
+            <button className="bg-green-600 text-white px-5 py-2 rounded-full font-medium hover:bg-green-700 transition shadow-md hover:shadow-lg">Sign Up</button>
           </div>
 
           <div className="md:hidden flex items-center">
             <button 
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-600 hover:text-blue-600 focus:outline-none"
+              className="text-gray-600 hover:text-green-600 focus:outline-none"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isOpen ? (
@@ -98,7 +99,7 @@ const Navbar = () => {
             <div className="py-2">
               <button 
                 onClick={() => setIsSearchByOpen(!isSearchByOpen)}
-                className="flex items-center justify-between w-full text-gray-600 hover:text-blue-600 font-medium"
+                className="flex items-center justify-between w-full text-gray-600 hover:text-green-600 font-medium"
               >
                 Search By
                 <svg className={`w-4 h-4 transition-transform duration-200 ${isSearchByOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,19 +109,19 @@ const Navbar = () => {
               {isSearchByOpen && (
                 <div className="mt-2 ml-4 flex flex-col space-y-2 border-l-2 border-gray-50 pl-4">
                   {searchOptions.map((option) => (
-                    <a key={option} href="#" className="text-sm text-gray-500 hover:text-blue-600 py-1 transition">
+                    <a key={option} href="#" className="text-sm text-gray-500 hover:text-green-600 py-1 transition">
                       {option}
                     </a>
                   ))}
                 </div>
               )}
             </div>
-            <a href="#" className="text-gray-600 hover:text-blue-600 font-medium py-2">For Providers</a>
-            <a href="#" className="text-gray-600 hover:text-blue-600 font-medium py-2">Resources</a>
+            <a href="#" className="text-gray-600 hover:text-green-600 font-medium py-2">For Providers</a>
+            <a href="#" className="text-gray-600 hover:text-green-600 font-medium py-2">Resources</a>
           </div>
           <div className="pt-4 border-t border-gray-100 flex flex-col space-y-3">
             <button className="text-gray-600 font-medium py-2 text-left">Login</button>
-            <button className="bg-blue-600 text-white px-5 py-3 rounded-xl font-medium hover:bg-blue-700 transition w-full shadow-md">Sign Up</button>
+            <button className="bg-green-600 text-white px-5 py-3 rounded-xl font-medium hover:bg-green-700 transition w-full shadow-md">Sign Up</button>
           </div>
         </div>
       )}
@@ -145,7 +146,7 @@ const SearchBar = ({ onSearch }) => {
           <input
             type="text"
             placeholder="City, Neighborhood or Zip"
-            className="w-full pl-3 pr-4 py-3 bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+            className="w-full pl-3 pr-4 py-3 bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
@@ -155,13 +156,13 @@ const SearchBar = ({ onSearch }) => {
           <input
             type="text"
             placeholder="e.g. 5 miles, 10km..."
-            className="w-full pl-3 pr-4 py-3 bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+            className="w-full pl-3 pr-4 py-3 bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
             value={distance}
             onChange={(e) => setDistance(e.target.value)}
           />
         </div>
         <div className="md:w-32 flex items-end">
-          <button type="submit" className="w-full bg-blue-600 text-white py-3.5 rounded-xl font-bold hover:bg-blue-700 transition shadow-md hover:shadow-lg h-[50px] md:h-auto">
+          <button type="submit" className="w-full bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-md hover:shadow-lg h-[50px] md:h-auto">
             Search
           </button>
         </div>
@@ -180,7 +181,7 @@ const ProviderCard = ({ provider }) => (
     </div>
     <div className="p-5 sm:p-6">
       <div className="flex justify-between items-start mb-2">
-        <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">{provider.type}</span>
+        <span className="text-xs font-bold text-green-600 uppercase tracking-widest">{provider.type}</span>
         <div className="flex items-center text-yellow-500">
           <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -189,7 +190,7 @@ const ProviderCard = ({ provider }) => (
           <span className="ml-1 text-xs text-gray-400">({provider.reviews})</span>
         </div>
       </div>
-      <h3 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition">{provider.name}</h3>
+      <h3 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-green-600 transition">{provider.name}</h3>
       <p className="text-sm text-gray-500 mb-4 flex items-center">
         <svg className="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -199,12 +200,12 @@ const ProviderCard = ({ provider }) => (
       </p>
       <div className="flex flex-wrap gap-2 mb-4">
         {provider.tags.map(tag => (
-          <span key={tag} className="px-2 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase rounded-md">
+          <span key={tag} className="px-2 py-1 bg-green-50 text-green-600 text-[10px] font-bold uppercase rounded-md">
             {tag}
           </span>
         ))}
       </div>
-      <button className="w-full py-2.5 bg-gray-50 text-gray-700 font-bold rounded-xl hover:bg-blue-600 hover:text-white transition duration-200">
+      <button className="w-full py-2.5 bg-gray-50 text-gray-700 font-bold rounded-xl hover:bg-green-600 hover:text-white transition duration-200">
         View Profile
       </button>
     </div>
@@ -219,7 +220,7 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div className="col-span-1 md:col-span-2">
           <div className="flex items-center space-x-2 mb-4">
-            <div className="bg-blue-600 p-1 rounded-lg">
+            <div className="bg-green-600 p-1 rounded-lg">
               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
@@ -275,31 +276,31 @@ const SidebarFilters = ({ filters, setFilters, availableTypes }) => {
         <div className="space-y-2">
           {availableTypes.map(type => (
             <label key={type} className="flex items-center group cursor-pointer">
-              <input
-                type="checkbox"
-                className="w-4 h-4 rounded text-blue-600 border-gray-300 focus:ring-blue-500 transition cursor-pointer"
-                checked={filters.types.includes(type)}
-                onChange={() => toggleType(type)}
-              />
-              <span className="ml-3 text-sm text-gray-600 group-hover:text-blue-600 transition">{type}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+          <input
+            type="checkbox"
+            className="w-4 h-4 rounded text-green-600 border-gray-300 focus:ring-green-500 transition cursor-pointer"
+            checked={filters.types.includes(type)}
+            onChange={() => toggleType(type)}
+          />
+          <span className="ml-3 text-sm text-gray-600 group-hover:text-green-600 transition">{type}</span>
+        </label>
+      ))}
+    </div>
+  </div>
 
-      <div>
-        <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Price Range</h3>
-        <div className="flex gap-2">
-          {prices.map(price => (
-            <button
-              key={price}
-              onClick={() => setFilters({ ...filters, price: filters.price === price ? null : price })}
-              className={`flex-1 py-2 text-xs font-bold rounded-lg border transition ${
-                filters.price === price
-                  ? 'bg-blue-600 border-blue-600 text-white shadow-md'
-                  : 'bg-white border-gray-200 text-gray-600 hover:border-blue-600 hover:text-blue-600'
-              }`}
-            >
+  <div>
+    <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Price Range</h3>
+    <div className="flex gap-2">
+      {prices.map(price => (
+        <button
+          key={price}
+          onClick={() => setFilters({ ...filters, price: filters.price === price ? null : price })}
+          className={`flex-1 py-2 text-xs font-bold rounded-lg border transition ${
+            filters.price === price
+              ? 'bg-green-600 border-green-600 text-white shadow-md'
+              : 'bg-white border-gray-200 text-gray-600 hover:border-green-600 hover:text-green-600'
+          }`}
+        >
               {price}
             </button>
           ))}
@@ -309,7 +310,7 @@ const SidebarFilters = ({ filters, setFilters, availableTypes }) => {
       <div>
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Minimum Rating</h3>
-          <span className="text-blue-600 font-bold text-sm">{filters.rating}+</span>
+          <span className="text-green-600 font-bold text-sm">{filters.rating}+</span>
         </div>
         <input
           type="range"
@@ -318,7 +319,7 @@ const SidebarFilters = ({ filters, setFilters, availableTypes }) => {
           step="0.1"
           value={filters.rating}
           onChange={(e) => setFilters({ ...filters, rating: parseFloat(e.target.value) })}
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
         />
         <div className="flex justify-between mt-2 text-[10px] text-gray-400 font-bold">
           <span>0.0</span>
@@ -329,7 +330,7 @@ const SidebarFilters = ({ filters, setFilters, availableTypes }) => {
 
       <button
         onClick={() => setFilters({ types: [], price: null, rating: 0 })}
-        className="w-full py-3 text-sm font-bold text-gray-500 hover:text-blue-600 border border-gray-200 hover:border-blue-600 rounded-xl transition"
+        className="w-full py-3 text-sm font-bold text-gray-500 hover:text-green-600 border border-gray-200 hover:border-green-600 rounded-xl transition"
       >
         Reset Filters
       </button>
@@ -372,7 +373,7 @@ const MapView = ({ providers, selectedProvider, setSelectedProvider }) => {
     : defaultCenter;
 
   const iconMapping = {
-    'Daycare Center': { color: '#2563eb', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>' },
+    'Daycare Center': { color: '#16a34a', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>' },
     'Home-based': { color: '#059669', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>' },
     'Preschool': { color: '#7c3aed', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>' },
     'Nursery': { color: '#db2777', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 12h-2m-2 0H5a2 2 0 00-2 2v2a2 2 0 002 2h14a2 2 0 002-2v-2a2 2 0 00-2-2z" /></svg>' },
@@ -393,7 +394,7 @@ const MapView = ({ providers, selectedProvider, setSelectedProvider }) => {
   };
 
   return (
-    <div className="w-full h-[600px] bg-blue-50 rounded-3xl border border-gray-200 relative overflow-hidden shadow-inner">
+    <div className="w-full h-[600px] bg-green-50 rounded-3xl border border-gray-200 relative overflow-hidden shadow-inner">
       <MapContainer 
         center={center} 
         zoom={12} 
@@ -425,7 +426,7 @@ const MapView = ({ providers, selectedProvider, setSelectedProvider }) => {
                 </div>
                 <div className="p-4">
                   <div className="flex justify-between items-start mb-1">
-                    <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">{provider.type}</span>
+                    <span className="text-[10px] font-bold text-green-600 uppercase tracking-widest">{provider.type}</span>
                     <div className="flex items-center text-yellow-500">
                       <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -435,7 +436,7 @@ const MapView = ({ providers, selectedProvider, setSelectedProvider }) => {
                   </div>
                   <h3 className="text-base font-bold text-gray-900 leading-tight mb-2">{provider.name}</h3>
                   <p className="text-xs text-gray-500 line-clamp-2 mb-4">{provider.description}</p>
-                  <button className="w-full py-2 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition shadow-sm">
+                  <button className="w-full py-2 bg-green-600 text-white text-xs font-bold rounded-lg hover:bg-green-700 transition shadow-sm">
                     View More Details
                   </button>
                 </div>
@@ -481,16 +482,26 @@ export default function App() {
 
       <main>
         {/* Hero Section */}
-        <section className="bg-blue-600 pt-12 pb-20 md:pt-20 md:pb-32 px-4 text-center text-white relative overflow-hidden">
+        <section 
+          className="pt-12 pb-20 md:pt-20 md:pb-32 px-4 text-center text-white relative overflow-hidden bg-green-800"
+          style={{
+            backgroundImage: `url(${leafBg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        >
+          {/* Overlay for readability */}
+          <div className="absolute inset-0 bg-green-900/60 pointer-events-none"></div>
+
           <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
              <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-             <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
+             <div className="absolute bottom-10 right-10 w-96 h-96 bg-green-400 rounded-full blur-3xl"></div>
           </div>
           <div className="max-w-4xl mx-auto relative z-10">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
               Find the perfect care for your little one
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-green-100 mb-8 max-w-2xl mx-auto leading-relaxed">
               Discover top-rated daycares, preschools, and home care providers in your neighborhood.
             </p>
             <SearchBar onSearch={handleSearch} />
@@ -512,7 +523,7 @@ export default function App() {
                 <div className="flex bg-gray-100 p-1 rounded-xl">
                   <button 
                     onClick={() => setViewMode('list')}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition duration-200 ${viewMode === 'list' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition duration-200 ${viewMode === 'list' ? 'bg-white text-green-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -521,7 +532,7 @@ export default function App() {
                   </button>
                   <button 
                     onClick={() => setViewMode('map')}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition duration-200 ${viewMode === 'map' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition duration-200 ${viewMode === 'map' ? 'bg-white text-green-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A2 2 0 013 15.485V5.111a2 2 0 011.106-1.789l5.447-2.724a2 2 0 011.894 0l5.447 2.724a2 2 0 011.106 1.789v10.374a2 2 0 01-1.106 1.789L10.894 20a2 2 0 01-1.894 0z" />
@@ -537,7 +548,7 @@ export default function App() {
                     setHasSearched(false);
                     setFilters({ types: [], price: null, rating: 0 });
                   }}
-                  className="text-blue-600 font-bold hover:underline ml-auto"
+                  className="text-green-600 font-bold hover:underline ml-auto"
                 >
                   Clear All
                 </button>
