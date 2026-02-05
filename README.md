@@ -1,3 +1,6 @@
+Pick a childcare is a free directory of childcare centers, licensed and non-licensed dayhomes. Parents can search for childcare providers in their area, see spots available, and join their waitlists
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
