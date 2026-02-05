@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, useNavigate, useParams, Link } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import leafBg from './assets/bg.jpg';
+import './App.css';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { providers, agencies, addresses, spotsAvailable } from './data';
@@ -1431,7 +1432,7 @@ export default function App() {
                 <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
                 <div className="absolute bottom-10 right-10 w-96 h-96 bg-green-400 rounded-full blur-3xl"></div>
               </div>
-              <div className="w-full mx-auto relative z-10">
+              <div className="w-full max-w-7xl mx-auto relative z-20 px-4">
                 <SearchBar onSearch={handleSearch} searchType={searchType} setSearchType={setSearchType} />
               </div>
             </section>
