@@ -2,7 +2,7 @@
   "name": "temp",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://pickachildcare.github.io/searchchildcare",
+  "homepage": "https://pickachildcare.com",
   "type": "module",
   "scripts": {
     "dev": "vite",
