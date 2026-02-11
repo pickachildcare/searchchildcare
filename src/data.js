@@ -223,6 +223,8 @@ export const providers = [
   }
 ];
 
+export const waitlist = [];
+
 export const addresses = [
   { id: 1, providerId: 1, fullAddress: "123 Sunny St, Toronto, ON M5V 2H1", province: "Ontario", city: "Toronto", community: "Downtown", coordinates: { lat: 43.6426, lng: -79.3871 } },
   { id: 2, providerId: 2, fullAddress: "456 Quiet Ln, Montreal, QC H3B 1A2", province: "Quebec", city: "Montreal", community: "Ville-Marie", coordinates: { lat: 45.5017, lng: -73.5673 } },

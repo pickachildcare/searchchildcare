@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { providers, agencies, addresses, spotsAvailable } from './data';
 import SearchAutocomplete from './SearchAutocomplete';
+import WaitlistForm from './WaitlistForm';
 
 const AgencyModal = ({ agency, onClose }) => {
   if (!agency) return null;
@@ -223,6 +224,7 @@ const deg2rad = (deg) => {
 const Navbar = ({ onSearchTypeChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchByOpen, setIsSearchByOpen] = useState(false);
+  const navigate = useNavigate();
 
   const searchOptions = [
     { label: "Nearby Location", value: "Nearby" },
@@ -235,19 +237,20 @@ const Navbar = ({ onSearchTypeChange }) => {
     <nav className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="bg-green-600 p-1.5 rounded-lg">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
             </div>
             <span className="text-xl sm:text-2xl font-bold text-green-600 tracking-tight">Pick A Childcare</span>
-          </div>
+          </Link>
           
           <div className="hidden md:flex items-center space-x-8">
             <div className="relative group">
               <button 
-                className="text-gray-600 hover:text-green-600 font-medium transition flex items-center gap-1 py-4"
+                onClick={() => navigate('/')}
+                className="text-gray-600 hover:text-green-600 font-medium transition flex items-center gap-1 py-4 cursor-pointer"
                 onMouseEnter={() => setIsSearchByOpen(true)}
                 onMouseLeave={() => setIsSearchByOpen(false)}
               >
@@ -277,6 +280,7 @@ const Navbar = ({ onSearchTypeChange }) => {
               </div>
             </div>
             <a href="#" className="text-gray-600 hover:text-green-600 font-medium transition">For Providers</a>
+            <Link to="/parents" className="text-gray-600 hover:text-green-600 font-medium transition">Parents</Link>
             <a href="#" className="text-gray-600 hover:text-green-600 font-medium transition">Resources</a>
           </div>
 
@@ -308,8 +312,11 @@ const Navbar = ({ onSearchTypeChange }) => {
           <div className="flex flex-col space-y-3">
             <div className="py-2">
               <button 
-                onClick={() => setIsSearchByOpen(!isSearchByOpen)}
-                className="flex items-center justify-between w-full text-gray-600 hover:text-green-600 font-medium"
+                onClick={() => {
+                  navigate('/');
+                  setIsSearchByOpen(!isSearchByOpen);
+                }}
+                className="flex items-center justify-between w-full text-gray-600 hover:text-green-600 font-medium cursor-pointer"
               >
                 Search By
                 <svg className={`w-4 h-4 transition-transform duration-200 ${isSearchByOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -335,6 +342,7 @@ const Navbar = ({ onSearchTypeChange }) => {
               )}
             </div>
             <a href="#" className="text-gray-600 hover:text-green-600 font-medium py-2">For Providers</a>
+            <Link to="/parents" className="text-gray-600 hover:text-green-600 font-medium py-2" onClick={() => setIsOpen(false)}>Parents</Link>
             <a href="#" className="text-gray-600 hover:text-green-600 font-medium py-2">Resources</a>
           </div>
           <div className="pt-4 border-t border-gray-100 flex flex-col space-y-3">
@@ -595,11 +603,8 @@ const ProviderCard = ({ provider, onAgencyClick, onAgesClick, onSpotsClick }) =>
               e.stopPropagation();
               onAgesClick(provider);
             }}
-            className="text-xs font-bold text-blue-600 hover:text-blue-800 transition flex items-center gap-1 cursor-pointer uppercase"
+            className="bg-blue-50 text-blue-700 text-xs font-bold px-2 py-1 rounded-full border-2 border-blue-600 uppercase tracking-tight hover:bg-blue-600 hover:text-white transition cursor-pointer"
           >
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
             Ages Served
           </button>
           {provider.type === "Licensed Home-based" && agency && (
@@ -608,7 +613,7 @@ const ProviderCard = ({ provider, onAgencyClick, onAgesClick, onSpotsClick }) =>
                 e.stopPropagation();
                 onAgencyClick(agency);
               }}
-              className="text-xs font-bold text-blue-600 uppercase tracking-tight hover:underline cursor-pointer"
+              className="bg-blue-50 text-blue-700 text-xs font-bold px-2 py-1 rounded-full border-2 border-blue-600 uppercase tracking-tight hover:bg-blue-600 hover:text-white transition cursor-pointer"
             >
               Agency: {agency.name}
             </button>
@@ -626,9 +631,15 @@ const ProviderCard = ({ provider, onAgencyClick, onAgesClick, onSpotsClick }) =>
               {provider.spotsAvailable} spots available
             </button>
           ) : (
-            <span className="bg-red-50 text-red-600 text-xs font-bold px-2 py-1 rounded-full border-2 border-red-600 uppercase tracking-tight">
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/waitlist/${provider.id}`);
+              }}
+              className="bg-red-50 text-red-600 text-xs font-bold px-2 py-1 rounded-full border-2 border-red-600 uppercase tracking-tight hover:bg-red-600 hover:text-white transition cursor-pointer"
+            >
               Waitlist
-            </span>
+            </button>
           )}
         </div>
       </div>
@@ -991,7 +1002,7 @@ const MapEvents = ({ onMapClick }) => {
 const iconMapping = {
   'Daycare Center': { color: '#16a34a', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>' },
   'Licensed Home-based': { color: '#059669', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>' },
-  'Preschool': { color: '#7c3aed', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>' },
+  'Preschool': { color: '#7c3aed', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 14l9-5-9-5-9 5 9 5z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>' },
   'Nursery': { color: '#db2777', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 12h-2m-2 0H5a2 2 0 00-2 2v2a2 2 0 002 2h14a2 2 0 002-2v-2a2 2 0 00-2-2z" /></svg>' },
   'After-School': { color: '#ea580c', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>' },
   'Montessori': { color: '#4f46e5', html: '<svg class="marker-icon" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>' }
@@ -1067,7 +1078,7 @@ const MapView = ({ providers, selectedProvider, setSelectedProvider, onAgencyCli
                             const agency = agencies.find(a => a.id === provider.agencyId);
                             if (agency) onAgencyClick(agency);
                           }}
-                          className="text-[10px] font-bold text-blue-600 uppercase tracking-tight hover:underline cursor-pointer"
+                          className="bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-1 rounded-full border-2 border-blue-600 uppercase tracking-tight hover:bg-blue-600 hover:text-white transition cursor-pointer"
                         >
                           Agency: {agencies.find(a => a.id === provider.agencyId)?.name}
                         </button>
@@ -1085,9 +1096,15 @@ const MapView = ({ providers, selectedProvider, setSelectedProvider, onAgencyCli
                           {provider.spotsAvailable} spots
                         </button>
                       ) : (
-                        <span className="bg-red-50 text-red-600 text-[10px] font-bold px-2 py-1 rounded-full border-2 border-red-600 uppercase tracking-tight">
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/waitlist/${provider.id}`);
+                          }}
+                          className="bg-red-50 text-red-600 text-[10px] font-bold px-2 py-1 rounded-full border-2 border-red-600 uppercase tracking-tight hover:bg-red-600 hover:text-white transition cursor-pointer"
+                        >
                           Waitlist
-                        </span>
+                        </button>
                       )}
                     </div>
                   </div>
@@ -1112,6 +1129,78 @@ const MapView = ({ providers, selectedProvider, setSelectedProvider, onAgencyCli
           );
         })}
       </MapContainer>
+    </div>
+  );
+};
+
+const ParentsPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div className="text-center mb-16">
+        <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl tracking-tight mb-4 uppercase">
+          How it Works for Parents
+        </h1>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          Finding the right childcare for your family shouldn't be a struggle. We've simplified the process into three easy steps.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        {/* Step 1 */}
+        <div className="flex flex-col items-center text-center p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+          <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-green-600 mb-6">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-bold text-gray-900 mb-4 uppercase">1. Search</h3>
+          <p className="text-gray-600">
+            Enter your location or search by provider name. Filter by childcare type, age group, and availability to find exactly what you need.
+          </p>
+        </div>
+
+        {/* Step 2 */}
+        <div className="flex flex-col items-center text-center p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+          <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-bold text-gray-900 mb-4 uppercase">2. Review</h3>
+          <p className="text-gray-600">
+            Explore detailed profiles, check real-time spot availability, and view photos. Learn about the provider's philosophy and features.
+          </p>
+        </div>
+
+        {/* Step 3 */}
+        <div className="flex flex-col items-center text-center p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+          <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-600 mb-6">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-bold text-gray-900 mb-4 uppercase">3. Connect</h3>
+          <p className="text-gray-600">
+            Contact providers directly or join waitlists. Get all the information you need to make the best choice for your child.
+          </p>
+        </div>
+      </div>
+      
+      <div className="mt-20 bg-green-600 rounded-3xl p-12 text-center text-white relative overflow-hidden">
+        <div className="relative z-10">
+          <h2 className="text-3xl font-bold mb-6 uppercase">Ready to find the perfect care?</h2>
+          <Link to="/" className="inline-block bg-white text-green-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-lg uppercase">
+            Start Your Search
+          </Link>
+        </div>
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-green-400/20 rounded-full blur-3xl"></div>
+      </div>
     </div>
   );
 };
@@ -1180,11 +1269,21 @@ const ProviderDetails = ({ onAgencyClick }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100">
+            <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col justify-center">
               <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">Availability</label>
-              <p className={`text-lg font-bold ${provider.spotsAvailable > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {provider.spotsAvailable > 0 ? `${provider.spotsAvailable} Spots Available` : 'Waitlist Only'}
-              </p>
+              <div className="flex items-center justify-between">
+                <p className={`text-lg font-bold ${provider.spotsAvailable > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  {provider.spotsAvailable > 0 ? `${provider.spotsAvailable} Spots Available` : 'Waitlist Only'}
+                </p>
+                {provider.spotsAvailable === 0 && (
+                  <button 
+                    onClick={() => navigate(`/waitlist/${provider.id}`)}
+                    className="px-4 py-2 bg-red-600 text-white text-sm font-bold rounded-lg hover:bg-red-700 transition shadow-sm cursor-pointer"
+                  >
+                    Join Waitlist
+                  </button>
+                )}
+              </div>
             </div>
             <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100">
               <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">Location</label>
@@ -1528,7 +1627,9 @@ export default function App() {
             )}
           </main>
         } />
+        <Route path="/parents" element={<ParentsPage />} />
         <Route path="/provider/:id" element={<ProviderDetails onAgencyClick={setSelectedAgency} />} />
+        <Route path="/waitlist/:id" element={<WaitlistForm />} />
       </Routes>
 
       <Footer />
